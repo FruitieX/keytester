@@ -2,6 +2,8 @@ var lastKey = 0;
 var lastKeypress = new Date();
 var keypressTreshold = 75; // ms
 
+var cnt = 0;
+
 process.stdin.setRawMode(true);
 
 process.stdin.on('readable', function() {
@@ -17,7 +19,8 @@ process.stdin.on('readable', function() {
     if (lastKey.toString() === chunk.toString('hex')) {
       // same key pressed twice
       if (curTime - lastKeypress < keypressTreshold) {
-        console.log('double press!');
+        console.log(cnt + ': double press! dt was: ' + (curTime - lastKeypress));
+        cnt++;
       }
     }
 
